@@ -28,7 +28,7 @@ def header = """<!DOCTYPE html>
   <title>Кнопка</title>
  </head>
  <body>
-   <table border="1" cellpadding="3" cellspacing="3"><tr><td><b>Дата</b></td><td><b>Автор</b></td><td><b>Коментарий</b></td></tr>"""
+   <table border="1" cellpadding="3" cellspacing="3"><tr><td><b>Дата</b></td><td><b>Подразделение автора</b></td><td><b>Автор</b></td><td><b>Коментарий</b></td></tr>"""
 def body = ""
 def footer = """</table>
  </body>
@@ -38,7 +38,9 @@ for (comment in comments) {
   body+="<tr><td>"
   body+=utils.formatters.formatDateTime(comment.creationDate)
   body+="</td><td>"
-  body+=comment.author.title
+  body+=comment.author?.parent.title?:"нет"
+  body+="</td><td>"
+  body+=comment.author?.title?:"Пользователь"
   body+="</td><td>"
   body+=comment.text
   body+="</td></tr>"
